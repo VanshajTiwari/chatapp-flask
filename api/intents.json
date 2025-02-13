@@ -1,0 +1,79 @@
+{
+    "intents": [
+        {
+            "tag": "greeting",
+            "patterns": ["Hi", "Hello", "Hey", "Good morning", "Good evening"],
+            "responses": ["Hello! How can I assist you with blogging?", "Hi there! What do you need help with?"]
+        },
+        {
+            "tag": "blog_ideas",
+            "patterns": ["Give me blog ideas", "Suggest a topic", "What should I write about?"],
+            "responses": ["How about writing about AI trends?", "You can explore content detoxification methods."]
+        },
+        {
+            "tag": "seo_tips",
+            "patterns": ["How to improve SEO?", "SEO tips", "Get more traffic"],
+            "responses": ["Use keyword research tools, write quality content, and improve backlinks."]
+        },
+        {
+            "tag": "content_improvement",
+            "patterns": ["How to make my blog engaging?", "Improve my content"],
+            "responses": ["Use storytelling, add visuals, and write in an active voice."]
+        },
+        {
+            "tag": "end",
+            "patterns": ["Bye", "Goodbye", "See you later"],
+            "responses": ["Goodbye! Happy blogging!", "See you later!"]
+        },
+        {
+            "tag": "audience_engagement",
+            "patterns": ["How can I engage my readers?", "How to increase reader interaction?", "Engagement tips"],
+            "responses": ["Ask open-ended questions, encourage comments, and use polls or quizzes to engage your audience."]
+        },
+        {
+            "tag": "content_schedule",
+            "patterns": ["When should I post?", "How often should I publish?", "Content schedule tips"],
+            "responses": ["Consistency is key! You should aim for at least one blog post per week, depending on your niche."]
+        },
+        {
+            "tag": "blog_structure",
+            "patterns": ["How should I structure my blog?", "What should a good blog post include?", "Tips for writing a well-structured blog"],
+            "responses": ["Start with a catchy introduction, break content into short paragraphs, use headings/subheadings, and end with a call to action."]
+        },
+        {
+            "tag": "monetization",
+            "patterns": ["How can I make money from blogging?", "Monetization strategies", "How to earn through my blog?"],
+            "responses": ["You can monetize through ads, affiliate marketing, sponsored posts, or selling your own products/services."]
+        },
+        {
+            "tag": "content_ideas_for_niche",
+            "patterns": ["Blog ideas for tech niche", "Write about coding", "Niche blog ideas"],
+            "responses": ["You could write tutorials, discuss emerging technologies, or review the latest tools in your field."]
+        },
+        {
+            "tag": "blog_post_format",
+            "patterns": ["How should I format my blog post?", "Formatting tips for blogs", "Perfect blog post layout"],
+            "responses": ["Use short paragraphs, bold headings, bulleted lists, and keep the language simple and reader-friendly."]
+        },
+        {
+            "tag": "analytics_tools",
+            "patterns": ["Which analytics tools should I use?", "How to track blog performance?", "Best tools for blog analytics"],
+            "responses": ["Google Analytics, Hotjar, and SEMrush are great tools to track your blog's performance and user engagement."]
+        },
+        {
+            "tag": "writing_style",
+            "patterns": ["How can I improve my writing style?", "Writing tips", "How to write better blog posts?"],
+            "responses": ["Read more, practice regularly, and focus on clarity and conciseness. Avoid jargon and use a conversational tone."]
+        },
+        {
+            "tag": "target_audience",
+            "patterns": ["How do I find my target audience?", "Who should I write for?", "Identifying blog audience"],
+            "responses": ["Understand your niche, research competitors, and use tools like Google Analytics to learn about your readers."]
+        },
+        {
+            "tag": "blog_visuals",
+            "patterns": ["How to add visuals to my blog?", "Tips for blog images", "Visual content for blogs"],
+            "responses": ["Use high-quality images, infographics, and videos to enhance your content. Always optimize images for faster loading."]
+        }
+    ]
+}
