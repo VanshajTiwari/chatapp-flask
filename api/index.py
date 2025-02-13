@@ -9,13 +9,17 @@ tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-medium")
 model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-medium")
 
 # Load intents
-with open("intents.json", "r") as file:
+with open("intents/intents.json", "r") as file:
     intents = json.load(file)
 
 app = Flask(__name__)
 
 # Store chat history (Optional: can use a database)
 chat_history = []
+
+MAX_HISTORY_LENGTH = 5  # Limit the number of exchanges to save
+MAX_TOKENS = 1024  # Max tokens for GPT models
+MAX_RESPONSE_LENGTH = 100  # Max length of the response
 
 @app.route("/api/get", methods=["GET"])
 def get_chat_history():
@@ -36,7 +40,11 @@ def post_chat():
     # Save message & response
     chat_history.append({"user": user_message, "bot": response})
 
-    return jsonify({"sender":"AI" ,"text":response})
+    # Trim chat history if it's too long
+    if len(chat_history) > MAX_HISTORY_LENGTH:
+        chat_history.pop(0)
+
+    return jsonify({"sender": "AI", "text": response})
 
 def get_response(user_input):
     """Match user input with predefined intents, otherwise use DialoGPT"""
@@ -49,9 +57,22 @@ def get_response(user_input):
 def get_Chat_response(text):
     """Generate response using DialoGPT if no intent matches"""
     new_user_input_ids = tokenizer.encode(str(text) + tokenizer.eos_token, return_tensors='pt')
-    bot_input_ids = new_user_input_ids
-    chat_history_ids = model.generate(bot_input_ids, max_length=1000, pad_token_id=tokenizer.eos_token_id)
-    return tokenizer.decode(chat_history_ids[:, bot_input_ids.shape[-1]:][0], skip_special_tokens=True)
+    
+    # Check if input is too long
+    if len(new_user_input_ids[0]) > MAX_TOKENS:
+        new_user_input_ids = new_user_input_ids[:, -MAX_TOKENS:]  # Truncate input
+    
+    # Generate response from model
+    chat_history_ids = model.generate(
+        new_user_input_ids, 
+        max_length=MAX_RESPONSE_LENGTH,  # Limit the response length
+        pad_token_id=tokenizer.eos_token_id,
+        no_repeat_ngram_size=2,  # Prevent repeating n-grams
+        top_p=0.9,  # Use nucleus sampling for diverse responses
+        temperature=0.7  # Control randomness
+    )
+    
+    return tokenizer.decode(chat_history_ids[:, new_user_input_ids.shape[-1]:][0], skip_special_tokens=True)
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
