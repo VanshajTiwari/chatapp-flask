@@ -9,7 +9,7 @@ tokenizer = AutoTokenizer.from_pretrained("microsoft/DialoGPT-medium")
 model = AutoModelForCausalLM.from_pretrained("microsoft/DialoGPT-medium")
 
 # Load intents
-with open("intents/intents.json", "r") as file:
+with open("intents.json", "r") as file:
     intents = json.load(file)
 
 app = Flask(__name__)
